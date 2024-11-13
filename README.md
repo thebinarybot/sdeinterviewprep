@@ -1,2 +1,7 @@
-# sdeinterviewprep
-Dumping notes on software development/engineer interview preparation
+# SDE Interview Preapataion Notes
+
+Index:
+
+1. Strings -> Rabin Karp Pseudo Code
+
+Author: Nithin Ravi // @thebinarybot
