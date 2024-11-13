@@ -1,0 +1,48 @@
+function RabinKarp(text, pattern):
+    final int PRIME_MODULUS = 101
+    patternLength = length of pattern
+    textLength = length of text
+    alphabetSize = 256                                                                          // assuming ASCII characters
+    hashFactor = (alphabetSize^(patternLength - 1)) % PRIME_MODULUS
+    patternHash = 0
+    currentWindowHash = 0
+    
+    // Preprocessing
+    for i from 0 to patternLength - 1:
+        patternHash = (alphabetSize * patternHash + pattern[i]) % PRIME_MODULUS                 // hash value of the pattern
+        currentWindowHash = (alphabetSize * currentWindowHash + text[i]) % PRIME_MODULUS        // hash value of the first window of the text
+
+    // Slide over the text
+    for i from 0 to textLength - patternLength:
+        if patternHash == currentWindowHash:
+            isMatch = true
+            for j from 0 to patternLength - 1:                                                  // necessary verification step for minimizing collision
+                if text[i + j] != pattern[j]:
+                    isMatch = false
+                    break
+            if isMatch:
+                print("Pattern found at index " + i)
+        
+        if i < textLength - patternLength:                                                      // if we are not the last window, slide right by one character
+            currentWindowHash = (alphabetSize * (currentWindowHash - text[i] * hashFactor) + text[i + patternLength]) % PRIME_MODULUS
+            if currentWindowHash < 0:
+                currentWindowHash += PRIME_MODULUS
+
+// Time Complexity:
+
+    Best Case: O(N+M)
+    Average Case: O(N+M)
+    Worst Case: O(N⋅M)
+
+Generally RK performs close to its average case, O(N+M), when implemented with a good choice of modulus and alphabet size.
+This minimizes hash collisions.
+
+
+// Further Notes:
+
+1. RabinKarp is a substring match finder algorithm. Works using rolling hash and sliding window concept.
+2. In the above pseudo code, I've implemented logic to double check character by chracter when a match is found. This is done to minimize collisions
+3. We can implement RK without prime modulous is doable but it might cause integer overflow issues. 
+4. Collision is basically like "abc" and "xyz" having the same hash values when the hash function is used on them.
+
+// Author: Nithin Ravi - @thebinarybot
