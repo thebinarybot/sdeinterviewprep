@@ -37,6 +37,10 @@ function RabinKarp(text, pattern):
 Generally RK performs close to its average case, O(N+M), when implemented with a good choice of modulus and alphabet size.
 This minimizes hash collisions.
 
+// Formulas:
+
+new_hash=(d×(old_hash−left_char×hash_factor)+right_char)mod q
+hash_factor=d^(M-1) // M is the length of the pattern
 
 // Further Notes:
 
@@ -44,5 +48,10 @@ This minimizes hash collisions.
 2. In the above pseudo code, I've implemented logic to double check character by chracter when a match is found. This is done to minimize collisions
 3. We can implement RK without prime modulous is doable but it might cause integer overflow issues. 
 4. Collision is basically like "abc" and "xyz" having the same hash values when the hash function is used on them.
+5. Why Prime Modulous? This is because prime modulous helps us achieve more uniform distribution of hash values.
+Mathematically, prime numbers have unique properties such as ensuring that every number has a multiplicative inverse under the modulous.
+This again helps in reducing the chance of collision.
+6. Why Hash Factor? Used to efficiently calculate the hash of the new window while sliding. To avoid recomputing the hash from scratch everytime,
+we can use the hash factor.
 
 // Author: Nithin Ravi - @thebinarybot
