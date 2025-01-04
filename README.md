@@ -1,7 +1,3 @@
-# SDE Interview Preapataion Notes
-
-Index:
-
-1. Strings -> Rabin Karp Pseudo Code
+# SDE Interview Preparation Notes
 
 Author: Nithin Ravi // @thebinarybot
